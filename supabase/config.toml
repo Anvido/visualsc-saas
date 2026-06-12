@@ -1,0 +1,38 @@
+# Supabase Configuration for VISUALSC
+# This file configures the Supabase CLI for local development and migrations
+
+[project]
+# This is your Supabase project ID (update with your actual project ID)
+# Find it in: https://app.supabase.com/project/<your-project-id>
+project_id = "YOUR_PROJECT_ID_HERE"
+
+[api]
+enabled = true
+port = 54321
+
+[db]
+port = 54322
+major_version = 15
+
+[realtime]
+enabled = true
+max_replication_slot_buffer_size = 67108864
+
+[vector]
+enabled = true
+port = 54328
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["https://localhost:3000"]
+
+[storage]
+enabled = true
+file_size_limit = 52428800
+
+[edge_functions]
+enabled = true
+
+[analytics]
+enabled = false

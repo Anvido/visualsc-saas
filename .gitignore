@@ -1,0 +1,96 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+.vite/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# TypeScript
+*.tsbuildinfo
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Vitest
+vitest-results/
+test-results/
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Supabase
+.supabase/
+supabase/.temp/
+supabase/.branches/
+
+# Drizzle
+drizzle/meta/_journal.json
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Package managers
+.pnp
+.pnp.js
+
+# Generated assets
+dist/spa/
+dist/server/
+
+# Deployment
+.vercel/
+.netlify/
+
+# Mac
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# Windows
+Desktop.ini
+
+# Secrets
+*.pem
+*.key
+*.crt
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock

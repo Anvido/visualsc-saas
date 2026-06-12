@@ -1,0 +1,137 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * VISUALSC Color Theme
+   * Modern, accessibility-focused palette with warm earth tones and deep blues
+   */
+  :root {
+    --background: 0 0% 99%;
+    --foreground: 225 10% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 225 10% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 225 10% 18%;
+
+    --primary: 225 70% 44%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 35 100% 58%;
+    --secondary-foreground: 225 10% 18%;
+
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 220 13% 91%;
+    --muted-foreground: 215 13% 50%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 13% 91%;
+    --input: 0 0% 100%;
+    --ring: 225 70% 44%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 225 10% 10%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 35 100% 58%;
+    --sidebar-primary-foreground: 225 10% 18%;
+    --sidebar-accent: 25 95% 53%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 225 20% 20%;
+    --sidebar-ring: 225 70% 44%;
+  }
+
+  .dark {
+    --background: 225 10% 12%;
+    --foreground: 0 0% 95%;
+
+    --card: 225 15% 18%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 225 15% 18%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 225 70% 55%;
+    --primary-foreground: 225 10% 10%;
+
+    --secondary: 35 100% 58%;
+    --secondary-foreground: 225 10% 18%;
+
+    --accent: 25 95% 53%;
+    --accent-foreground: 225 10% 18%;
+
+    --muted: 225 20% 30%;
+    --muted-foreground: 0 0% 75%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 225 20% 20%;
+    --input: 225 15% 22%;
+    --ring: 225 70% 55%;
+
+    --sidebar-background: 225 10% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 35 100% 58%;
+    --sidebar-primary-foreground: 225 10% 18%;
+    --sidebar-accent: 25 95% 53%;
+    --sidebar-accent-foreground: 225 10% 18%;
+    --sidebar-border: 225 20% 20%;
+    --sidebar-ring: 225 70% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+
+  :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
+}
+
+@layer components {
+  .button-primary {
+    @apply px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity;
+  }
+
+  .button-secondary {
+    @apply px-6 py-3 bg-secondary text-secondary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity border border-secondary;
+  }
+
+  .button-outline {
+    @apply px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors;
+  }
+
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+}
