@@ -1,51 +1,56 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Validate environment variables
 function validateSupabaseConfig(): { url: string; key: string } | null {
   if (!supabaseUrl) {
     console.error(
-      '[VISUALSC] Missing VITE_SUPABASE_URL environment variable. ' +
-      'Create a .env.local file with your Supabase project URL.'
-    )
-    return null
+      "[VISUALSC] Missing VITE_SUPABASE_URL environment variable. " +
+        "Create a .env.local file with your Supabase project URL.",
+    );
+    return null;
   }
 
   if (!supabaseAnonKey) {
     console.error(
-      '[VISUALSC] Missing VITE_SUPABASE_ANON_KEY environment variable. ' +
-      'Create a .env.local file with your Supabase anon key.'
-    )
-    return null
+      "[VISUALSC] Missing VITE_SUPABASE_ANON_KEY environment variable. " +
+        "Create a .env.local file with your Supabase anon key.",
+    );
+    return null;
   }
 
   // Basic validation of URL format
-  if (!supabaseUrl.includes('supabase.co')) {
+  if (!supabaseUrl.includes("supabase.co")) {
     console.error(
-      '[VISUALSC] Invalid VITE_SUPABASE_URL. ' +
-      'Expected format: https://your-project-ref.supabase.co'
-    )
-    return null
+      "[VISUALSC] Invalid VITE_SUPABASE_URL. " +
+        "Expected format: https://your-project-ref.supabase.co",
+    );
+    return null;
   }
 
-  // Basic validation of key format
-  if (!supabaseAnonKey.startsWith('eyJ')) {
+  // Validates if it's a legacy JWT (eyJ) or the new Supabase key format (sb_p_ / sb_publishable_)
+  const isValidKey =
+    supabaseAnonKey.startsWith("eyJ") ||
+    supabaseAnonKey.startsWith("sb_p_") ||
+    supabaseAnonKey.startsWith("sb_publishable_");
+
+  if (!isValidKey) {
     console.error(
-      '[VISUALSC] Invalid VITE_SUPABASE_ANON_KEY. ' +
-      'Ensure you copied the complete anon key from Supabase settings.'
-    )
-    return null
+      "[VISUALSC] Invalid VITE_SUPABASE_ANON_KEY. " +
+        "Ensure you copied the complete anon/publishable key from Supabase settings.",
+    );
+    return null;
   }
 
-  return { url: supabaseUrl, key: supabaseAnonKey }
+  return { url: supabaseUrl, key: supabaseAnonKey };
 }
 
 // Create Supabase client
-let supabase: SupabaseClient
+let supabase: SupabaseClient;
 
-const config = validateSupabaseConfig()
+const config = validateSupabaseConfig();
 
 if (config) {
   // Production: Supabase properly configured
@@ -55,49 +60,49 @@ if (config) {
       autoRefreshToken: true,
       detectSessionInUrl: true,
     },
-  })
+  });
 } else {
   // Development: Missing credentials - create a non-functional client
   // This allows the app to load and show helpful error messages
   console.warn(
-    '[VISUALSC] Supabase not configured. ' +
-    'Public pages will render, but authentication and database operations will fail. ' +
-    'See .env.example for setup instructions.'
-  )
-  
+    "[VISUALSC] Supabase not configured. " +
+      "Public pages will render, but authentication and database operations will fail. " +
+      "See .env.example for setup instructions.",
+  );
+
   // Create a placeholder client that will fail gracefully on operations
   supabase = createClient(
-    'https://placeholder.supabase.co',
-    'placeholder-key',
+    "https://placeholder.supabase.co",
+    "placeholder-key",
     {
       auth: { persistSession: false },
-    }
-  )
+    },
+  );
 }
 
 // Helper to check if Supabase is properly configured
 export function isSupabaseConfigured(): boolean {
-  return Boolean(config)
+  return Boolean(config);
 }
 
 // Helper to get configuration status for UI/debugging
 export function getSupabaseStatus(): {
-  configured: boolean
-  message: string
+  configured: boolean;
+  message: string;
 } {
   if (!config) {
     return {
       configured: false,
       message:
-        'Supabase not configured. ' +
-        'Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in .env.local',
-    }
+        "Supabase not configured. " +
+        "Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in .env.local",
+    };
   }
 
   return {
     configured: true,
     message: `Connected to Supabase project at ${config.url}`,
-  }
+  };
 }
 
-export { supabase }
+export { supabase };
